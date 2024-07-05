@@ -81,7 +81,7 @@ CREATE TABLE pago (
 CREATE TABLE pedido (
     codigo_pedido INT(11),
     fecha_pedido DATE,
-    fecha_esparada DATE,
+    fecha_esperada DATE,
     fecha_entrega DATE,
     estado VARCHAR(15),
     comentarios TEXT,

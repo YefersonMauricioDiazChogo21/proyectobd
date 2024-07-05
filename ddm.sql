@@ -42,7 +42,7 @@ INSERT INTO producto (codigo_producto, nombre, gama, dimensiones, proveedor, des
 ('P005', 'Producto 5', 'Ornamental', '50x50x50', 'Proveedor 5', 'Descripción del producto 5', 500, 20.00, 15.00),
 ('P006', 'Producto 6', 'Lujo', '60x60x60', 'Proveedor 6', 'Descripción del producto 6', 600, 70.00, 70.00);
 
-INSERT INTO pedido (codigo_pedido, fecha_pedido, fecha_esparada, fecha_entrega, estado, comentarios, codigo_cliente) VALUES
+INSERT INTO pedido (codigo_pedido, fecha_pedido, fecha_esperada, fecha_entrega, estado, comentarios, codigo_cliente) VALUES
 (1, '2009-01-01', '2009-01-05', '2009-01-02', 'Rechazado', 'Sin comentarios', 1),
 (2, '2024-01-01', '2024-01-05', '2024-01-02', 'Entregado', 'Sin comentarios', 2),
 (3, '2024-03-01', '2024-03-05', '2024-03-02', 'Cancelado', 'Sin comentarios', 3),

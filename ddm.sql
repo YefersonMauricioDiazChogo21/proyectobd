@@ -12,8 +12,8 @@ INSERT INTO oficina (codigo_oficina, ciudad, pais, region, codigo_postal, telefo
 ('OF03', 'Valencia', 'España', 'Valencia', '46001', '9612345', 'Calle Colon 3', 'casa 18'),
 ('OF04', 'Sevilla', 'España', 'Andalucía', '31001', '6254135', 'Calle Sierpes 4', 'Piso 1'),
 ('OF05', 'Bilbao', 'España', 'País Vasco', '48001', '944123456', 'Gran Vía 5', 'casa 11'),
-('OF06', 'Bucaramanga', 'Colombia', 'Conucos', '60001', '976123456', 'Calle Alfonso 6', 'piso 8');
-('OF07', 'madrid', 'España', 'Fuenlabrada', '46002', '9612340', 'Calle Colon 7', 'casa 20'),
+('OF06', 'Bucaramanga', 'Colombia', 'Conucos', '60001', '976123456', 'Calle Alfonso 6', 'piso 8'),
+('OF07', 'madrid', 'España', 'Fuenlabrada', '46002', '9612340', 'Calle Colon 7', 'casa 20');
 
 INSERT INTO empleado (codigo_empleado, nombre, apellido1, apellido2, extension, email, codigo_oficina, codigo_jefe, puesto) VALUES
 (1, 'Mauricio', 'Pérez', 'García', '101', 'Mauricio.perez@emp.com', 'OF01', 2, 'Gerente'),
@@ -24,7 +24,7 @@ INSERT INTO empleado (codigo_empleado, nombre, apellido1, apellido2, extension, 
 (6, 'Laura', 'García', 'Pérez', '106', 'Laura.garcia@emp.com', 'OF06', 4, 'Contable'),
 (7, 'Carlos', 'López', 'Martínez', '105', 'carlos.lopez@emp.com', 'OF05', 3, 'Representante de ventas'),
 (11, 'Valentina', 'García', 'Pérez', '106', 'Laura.garcia@emp.com', 'OF06', 4, 'Contable'),
-(30, 'Luis', 'García', 'Pérez', '106', 'Mario.garcia@emp.com', 'OF07', 1, 'Jefe ventas')9
+(30, 'Luis', 'García', 'Pérez', '106', 'Mario.garcia@emp.com', 'OF07', 1, 'Jefe ventas');
 
 INSERT INTO cliente (codigo_cliente, nombre_cliente, nombre_contacto, apellido_contacto, telefono, fax, linea_direccion1, linea_direccion2, ciudad, region, pais, codigo_postal, codigo_empleado_rep_ventas, limite_credito) VALUES
 (1, 'Empresa A', 'Carlos', 'Sánchez', '915678910', '915678911', 'Calle Ejemplo 1', 'Piso 1', 'Madrid', 'Madrid', 'España', '28001', 11, 20000),

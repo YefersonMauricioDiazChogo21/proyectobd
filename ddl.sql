@@ -96,7 +96,7 @@ CREATE TABLE detalle_pedido (
     cantidad INT(11),
     precio_unidad DECIMAL(15,2),
     numero_linea SMALLINT(6),
-    PRIMARY KEY (codigo_pedido, codigo_producto),
-    FOREIGN KEY (codigo_pedido) REFERENCES pedido(codigo_pedido),
-    FOREIGN KEY (codigo_producto) REFERENCES producto(codigo_producto)
+    CONSTRAINT PRIMARY KEY (codigo_pedido, codigo_producto),
+    CONSTRAINT FOREIGN KEY (codigo_pedido) REFERENCES pedido(codigo_pedido),
+    CONSTRAINT FOREIGN KEY (codigo_producto) REFERENCES producto(codigo_producto)
 );

@@ -68,19 +68,13 @@
     • Sin utilizar ninguna de las funciones anteriores.
 
     ```sql
-    SELECT DISTINCT codigo_cliente, YEAR(fecha_pago) AS "Año"
-    FROM pago
-    WHERE YEAR(fecha_pago)=2008;
+    SELECT DISTINCT codigo_cliente, 
+    FROM pedido
+    WHERE 
     
-    SELECT DISTINCT codigo_cliente, DATE_FORMAT(fecha_pago,'%Y') AS "Año"
-    FROM pago
-    WHERE YEAR(fecha_pago)=2008;
-    
-    SELECT DISTINCT codigo_cliente, fecha_pago AS "Año"
-    FROM pago
-    WHERE fecha_pago LIKE '%2008%';
+    revisar
     ```
-    
+
 9. Devuelve un listado con el código de pedido, código de cliente, fecha
     esperada y fecha de entrega de los pedidos que no han sido entregados a
     tiempo.
@@ -89,8 +83,10 @@
     SELECT codigo_pedido, codigo_cliente, fecha_esperada, fecha_entrega
     FROM pedido
     WHERE fecha_entrega>fecha_esperada;
-    ```
     
+    revisar
+    ```
+
 10. Devuelve un listado con el código de pedido, código de cliente, fecha
     esperada y fecha de entrega de los pedidos cuya fecha de entrega ha sido al
     menos dos días antes de la fecha esperada.
@@ -112,28 +108,34 @@
     ```sql
     SELECT codigo_pedido, estado
     FROM pedido
-    WHERE estado="Rechazado" AND YEAR(fecha_pedido)=2009;
-    ```
+    WHERE estado="Rechazado" AND ;
     
+    revisar
+    ```
+
 12. Devuelve un listado de todos los pedidos que han sido entregados en el
     mes de enero de cualquier año.
 
     ```SQL
-    SELECT codigo_pedido, estado, fecha_entrega
+    SELECT codigo_pedido, estado
     FROM pedido
-    WHERE estado ="Entregado" AND DATE_FORMAT(fecha_entrega,'%M')="January";
-    ```
+    WHERE estado ="Entregado" AND fecha_entrega=;
     
+    revisar
+    ```
+
 13. Devuelve un listado con todos los pagos que se realizaron en el
     año 2008 mediante Paypal. Ordene el resultado de mayor a menor.
 
     ```sql
     SELECT codigo_cliente, forma_pago, fecha_pago, total
     FROM pago
-    WHERE forma_pago="Paypal" AND YEAR(fecha_pago)=2008
+    WHERE forma_pago="Paypal" AND fecha_pago=
     ORDER BY total DESC;
-    ```
     
+    revisar
+    ```
+
 14. Devuelve un listado con todas las formas de pago que aparecen en la
     tabla pago. Tenga en cuenta que no deben aparecer formas de pago
     repetidas.
@@ -151,7 +153,7 @@
     ```sql
     SELECT codigo_producto, nombre, cantidad_en_stock, precio_venta
     FROM producto
-    WHERE cantidad_en_stock>=100 AND gama="Ornamental"
+    WHERE cantidad_en_stock>=100
     ORDER BY precio_venta DESC;
     ```
 
@@ -184,10 +186,12 @@
     nombre de sus representantes de ventas.
 
     ```SQL
-    SELECT c.nombre_cliente, e.nombre AS "Rep Ventas", p.fecha_pago
+    SELECT c.nombre, e.nombre AS "Rep Ventas", p.fecha_pago
     FROM cliente c
     INNER JOIN empleado e ON c.codigo_empleado_rep_ventas= e.codigo_empleado
     INNER JOIN pago p ON c.codigo_cliente = p.codigo_cliente;
+    
+    revisar
     ```
 
 
@@ -195,10 +199,12 @@
     el nombre de sus representantes de ventas.
 
     ```SQL
-    SELECT c.nombre_cliente, e.nombre AS "Representante Ventas"
+    SELECT c.nombre, e.nombre AS "Representante Ventas"
     FROM cliente c
     INNER JOIN empleado e ON c.codigo_empleado_rep_ventas= e.codigo_empleado
     INNER JOIN pago p ON c.codigo_cliente = p.codigo_cliente;
+    
+    revisar
     ```
 
 
@@ -207,11 +213,13 @@
     representante.
 
     ```SQL
-    SELECT c.nombre_cliente, e.nombre AS "Representante Ventas", p.fecha_pago, o.ciudad AS "Ciudad oficina"
+    SELECT c.nombre, e.nombre AS "Representante Ventas", p.fecha_pago, o.ciudad AS "Ciudad oficina"
     FROM cliente c
     INNER JOIN empleado e ON c.codigo_empleado_rep_ventas= e.codigo_empleado
     INNER JOIN pago p ON c.codigo_cliente = p.codigo_cliente
     INNER JOIN oficina o  ON e.codigo_oficina =o.codigo_oficina;
+    
+    revisar con la 2
     ```
 
 
@@ -220,11 +228,13 @@
     representante.
 
     ```SQL
-    SELECT c.nombre_cliente, e.nombre AS "Representante Ventas", p.fecha_pago, o.ciudad AS "Ciudad oficina"
+    SELECT c.nombre, e.nombre AS "Representante Ventas", p.fecha_pago, o.ciudad AS "Ciudad oficina"
     FROM cliente c
     INNER JOIN empleado e ON c.codigo_empleado_rep_ventas= e.codigo_empleado
     INNER JOIN pago p ON c.codigo_cliente = p.codigo_cliente
     INNER JOIN oficina o  ON e.codigo_oficina =o.codigo_oficina;
+    
+    revisar con la 3
     ```
 
 
@@ -243,7 +253,7 @@
     con la ciudad de la oficina a la que pertenece el representante.
 
     ```SQL
-    SELECT c.nombre_cliente, e.nombre AS "Representante Ventas", o.ciudad AS "Ciudad oficina"
+    SELECT c.nombre, e.nombre AS "Representante Ventas", o.ciudad AS "Ciudad oficina"
     FROM cliente c
     INNER JOIN empleado e ON c.codigo_empleado_rep_ventas= e.codigo_empleado
     INNER JOIN oficina o  ON e.codigo_oficina =o.codigo_oficina;
@@ -256,7 +266,7 @@
      ```SQL
      SELECT e.nombre, j.nombre AS "Nombre jefe"
      FROM empleado e
-     INNER JOIN empleado j ON j.codigo_empleado=e.codigo_jefe;
+     INNER JOIN empleado j ON j.codigo_empoleado=e.codigo_jefe;
      ```
 
 9. Devuelve un listado que muestre el nombre de cada empleados, el nombre
@@ -273,17 +283,17 @@
      tiempo un pedido.
 
      ```SQL
-     SELECT DISTINCT c.nombre_cliente , p.fecha_esperada, p.fecha_entrega
+     SELECT DISTINCT c.nombre_cliente 
      FROM cliente c
      INNER JOIN pedido p ON c.codigo_cliente = p.codigo_cliente
-     WHERE p.fecha_esperada<=p.fecha_entrega;
+     WHERE p.fecha_esperada>=p.fecha_entrega;
      ```
 
 11. Devuelve un listado de las diferentes gamas de producto que ha comprado
       cada cliente.
 
       ```sql
-      SELECT GROUP_CONCAT(g.gama ORDER BY g.gama SEPARATOR ", "), c.nombre_cliente 
+      SELECT GROUP_CONCAT(g.gama ORDER BY g.gama SEPARATOR ", "), c.cliente 
       FROM gama g 
       RIGHT JOIN cliente c
       GROUP BY c.cliente;
@@ -308,16 +318,20 @@
          realizado ningún pedido.
 
       ```SQL
-      
+      SELECT DISTINCT c.nombre, p.fecha_pedido
+      FROM cliente c
+      LEFT JOIN pedido p WHERE p.fecha_pedido!=Null;
       ```
-
+    
 14. Devuelve un listado que muestre los clientes que no han realizado ningún
          pago y los que no han realizado ningún pedido.
 
       ```SQL
-      
+      SELECT DISTINCT c.nombre, pe.fecha_pedido , p.fecha_pago
+      FROM cliente c
+      LEFT JOIN pedido pe WHERE pe.fecha_pedido!=Null; AND pago p WHERE p.fecha_pago!=Null;
       ```
-
+    
 15. Devuelve un listado que muestre solamente los empleados que no tienen
          una oficina asociada.
 
@@ -570,5 +584,5 @@ empleados que no sean representante de ventas de ningún cliente.
    número de empleados que tiene.
 
     ```SQL
-    
+    SELECT
     ```

@@ -183,24 +183,58 @@
 2. Muestra el nombre de los clientes que hayan realizado pagos junto con el
   nombre de sus representantes de ventas.
 
+  ```SQL
+  
+  ```
+
+
 3. Muestra el nombre de los clientes que no hayan realizado pagos junto con
   el nombre de sus representantes de ventas.
+
+  ```SQL
+  
+  ```
+
 
 4. Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus
   representantes junto con la ciudad de la oficina a la que pertenece el
   representante.
 
+  ```SQL
+  
+  ```
+
+
 5. Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre
   de sus representantes junto con la ciudad de la oficina a la que pertenece el
   representante.
 
+  ```SQL
+  
+  ```
+
+
 6. Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
+
+  ```SQL
+  
+  ```
+
 
 7. Devuelve el nombre de los clientes y el nombre de sus representantes junto
   con la ciudad de la oficina a la que pertenece el representante.
 
+  ```SQL
+  
+  ```
+
+
 8. Devuelve un listado con el nombre de los empleados junto con el nombre
   de sus jefes.
+  
+  ```SQL
+  
+  ```
 
 9. Devuelve un listado que muestre el nombre de cada empleados, el nombre
   de su jefe y el nombre del jefe de sus jefe.

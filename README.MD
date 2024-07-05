@@ -3,7 +3,7 @@
 ### Consultas sobre una tabla
 
 1. Devuelve un listado con el código de oficina y la ciudad donde hay oficinas.
-
+  
 2. Devuelve un listado con la ciudad y el teléfono de las oficinas de España.
 3. Devuelve un listado con el nombre, apellidos y email de los empleados cuyo
 jefe tiene un código de jefe igual a 7.

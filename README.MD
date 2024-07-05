@@ -18,7 +18,7 @@
    ```
 
 3. Devuelve un listado con el nombre, apellidos y email de los empleados cuyo
-  jefe tiene un código de jefe igual a 7.
+    jefe tiene un código de jefe igual a 7.
 
     ```sql
     SELECT nombre, apellido1, apellido2, email
@@ -27,7 +27,7 @@
     ```
 
 4. Devuelve el nombre del puesto, nombre, apellidos y email del jefe de la
-  empresa.
+    empresa.
 
     ```sql
     SELECT puesto, nombre, apellido1, apellido2, email
@@ -36,7 +36,7 @@
     ```
 
 5. Devuelve un listado con el nombre, apellidos y puesto de aquellos
-  empleados que no sean representantes de ventas.
+    empleados que no sean representantes de ventas.
 
     ```sql
     SELECT nombre, apellido1, apellido2,puesto
@@ -53,7 +53,7 @@
    ```
 
 7. Devuelve un listado con los distintos estados por los que puede pasar un
-  pedido.
+    pedido.
 
     ```sql
     SELECT DISTINCT estado
@@ -61,11 +61,11 @@
     ```
 
 8. Devuelve un listado con el código de cliente de aquellos clientes que
-  realizaron algún pago en 2008. Tenga en cuenta que deberá eliminar
-  aquellos códigos de cliente que aparezcan repetidos. Resuelva la consulta:
-  • Utilizando la función YEAR de MySQL.
-  • Utilizando la función DATE_FORMAT de MySQL.
-  • Sin utilizar ninguna de las funciones anteriores.
+    realizaron algún pago en 2008. Tenga en cuenta que deberá eliminar
+    aquellos códigos de cliente que aparezcan repetidos. Resuelva la consulta:
+    • Utilizando la función YEAR de MySQL.
+    • Utilizando la función DATE_FORMAT de MySQL.
+    • Sin utilizar ninguna de las funciones anteriores.
 
     ```sql
     SELECT DISTINCT codigo_cliente, 
@@ -76,8 +76,8 @@
     ```
 
 9. Devuelve un listado con el código de pedido, código de cliente, fecha
-  esperada y fecha de entrega de los pedidos que no han sido entregados a
-  tiempo.
+    esperada y fecha de entrega de los pedidos que no han sido entregados a
+    tiempo.
 
     ```sql
     SELECT codigo_pedido, codigo_cliente, fecha_esperada, fecha_entrega
@@ -174,206 +174,253 @@
 **sintaxis de SQL2 se deben resolver con INNER JOIN y NATURAL JOIN.**
 
 1. Obtén un listado con el nombre de cada cliente y el nombre y apellido de su
-  representante de ventas.
+    representante de ventas.
 
     ```SQL
-    
+    SELECT c.nombre_cliente, e.nombre AS "Rep Ventas", e.apellido1 AS "Apellido Rep"
+    FROM cliente c
+    INNER JOIN empleado e ON c.codigo_empleado_rep_ventas= e.codigo_empleado;
     ```
-
+    
 2. Muestra el nombre de los clientes que hayan realizado pagos junto con el
-  nombre de sus representantes de ventas.
+    nombre de sus representantes de ventas.
 
     ```SQL
+    SELECT c.nombre, e.nombre AS "Rep Ventas", p.fecha_pago
+    FROM cliente c
+    INNER JOIN empleado e ON c.codigo_empleado_rep_ventas= e.codigo_empleado
+    INNER JOIN pago p ON c.codigo_cliente = p.codigo_cliente;
     
+    revisar
     ```
 
 
 3. Muestra el nombre de los clientes que no hayan realizado pagos junto con
-  el nombre de sus representantes de ventas.
+    el nombre de sus representantes de ventas.
 
     ```SQL
+    SELECT c.nombre, e.nombre AS "Representante Ventas"
+    FROM cliente c
+    INNER JOIN empleado e ON c.codigo_empleado_rep_ventas= e.codigo_empleado
+    INNER JOIN pago p ON c.codigo_cliente = p.codigo_cliente;
     
+    revisar
     ```
 
 
 4. Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus
-  representantes junto con la ciudad de la oficina a la que pertenece el
-  representante.
+    representantes junto con la ciudad de la oficina a la que pertenece el
+    representante.
 
     ```SQL
+    SELECT c.nombre, e.nombre AS "Representante Ventas", p.fecha_pago, o.ciudad AS "Ciudad oficina"
+    FROM cliente c
+    INNER JOIN empleado e ON c.codigo_empleado_rep_ventas= e.codigo_empleado
+    INNER JOIN pago p ON c.codigo_cliente = p.codigo_cliente
+    INNER JOIN oficina o  ON e.codigo_oficina =o.codigo_oficina;
     
+    revisar con la 2
     ```
 
 
 5. Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre
-  de sus representantes junto con la ciudad de la oficina a la que pertenece el
-  representante.
+    de sus representantes junto con la ciudad de la oficina a la que pertenece el
+    representante.
 
     ```SQL
+    SELECT c.nombre, e.nombre AS "Representante Ventas", p.fecha_pago, o.ciudad AS "Ciudad oficina"
+    FROM cliente c
+    INNER JOIN empleado e ON c.codigo_empleado_rep_ventas= e.codigo_empleado
+    INNER JOIN pago p ON c.codigo_cliente = p.codigo_cliente
+    INNER JOIN oficina o  ON e.codigo_oficina =o.codigo_oficina;
     
+    revisar con la 3
     ```
 
 
 6. Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
 
     ```SQL
-    
+    SELECT o.linea_direccion1, o.linea_direccion2, c.region AS "Region cliente"
+    FROM oficina o
+    INNER JOIN empleado e ON o.codigo_oficina = e.codigo_oficina
+    INNER JOIN cliente c ON c.codigo_empleado_rep_ventas = e.codigo_empleado
+    WHERE c.region ="Fuenlabrada";
     ```
 
 
 7. Devuelve el nombre de los clientes y el nombre de sus representantes junto
-  con la ciudad de la oficina a la que pertenece el representante.
+    con la ciudad de la oficina a la que pertenece el representante.
 
     ```SQL
-    
+    SELECT c.nombre, e.nombre AS "Representante Ventas", o.ciudad AS "Ciudad oficina"
+    FROM cliente c
+    INNER JOIN empleado e ON c.codigo_empleado_rep_ventas= e.codigo_empleado
+    INNER JOIN oficina o  ON e.codigo_oficina =o.codigo_oficina;
     ```
 
 
 8. Devuelve un listado con el nombre de los empleados junto con el nombre
-  de sus jefes.
-  
-    ```SQL
-    
-    ```
+     de sus jefes.
+
+     ```SQL
+     SELECT e.nombre, j.nombre AS "Nombre jefe"
+     FROM empleado e
+     INNER JOIN empleado j ON j.codigo_empoleado=e.codigo_jefe;
+     ```
 
 9. Devuelve un listado que muestre el nombre de cada empleados, el nombre
-  de su jefe y el nombre del jefe de sus jefe.
+     de su jefe y el nombre del jefe de sus jefe.
 
-    ```SQL
-    
-    ```
+     ```SQL
+     SELECT e.nombre, j.nombre AS "Nombre jefe", jj.nombre AS "Nombre del jefe del jefe"
+     FROM empleado e
+     INNER JOIN empleado j ON j.codigo_empleado=e.codigo_jefe
+     INNER JOIN empleado jj ON jj.codigo_empleado=j.codigo_jefe;
+     ```
 
 10. Devuelve el nombre de los clientes a los que no se les ha entregado a
-    tiempo un pedido.
+     tiempo un pedido.
 
-    ```SQL
-    
-    ```
+     ```SQL
+     SELECT DISTINCT c.nombre_cliente 
+     FROM cliente c
+     INNER JOIN pedido p ON c.codigo_cliente = p.codigo_cliente
+     WHERE p.fecha_esperada>=p.fecha_entrega;
+     ```
 
 11. Devuelve un listado de las diferentes gamas de producto que ha comprado
-    cada cliente.
-    Consultas multitabla (Composición externa)
-    Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN, NATURAL
-    LEFT JOIN y NATURAL RIGHT JOIN.
+      cada cliente.
 
-    ```SQL
-    
-    ```
+      ```sql
+      SELECT GROUP_CONCAT(g.gama ORDER BY g.gama SEPARATOR ", "), c.cliente 
+      FROM gama g 
+      RIGHT JOIN cliente c
+      GROUP BY c.cliente;
+      ```
+
+      #### **Consultas multitabla (Composición externa)**
+
+      **Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN, NATURAL**
+      **LEFT JOIN y NATURAL RIGHT JOIN.**
 
 12. Devuelve un listado que muestre solamente los clientes que no han
-   realizado ningún pago.
+         realizado ningún pago.
 
-    ```SQL
-    
-    ```
+      ```SQL
+      SELECT DISTINCT c.nombre, p.fecha_pago
+      FROM cliente c
+      LEFT JOIN pago p
+      WHERE p.fecha_pago!=Null;
+      ```
 
 13. Devuelve un listado que muestre solamente los clientes que no han
-   realizado ningún pedido.
+         realizado ningún pedido.
 
-    ```SQL
-    
-    ```
+      ```SQL
+      
+      ```
 
 14. Devuelve un listado que muestre los clientes que no han realizado ningún
-   pago y los que no han realizado ningún pedido.
+         pago y los que no han realizado ningún pedido.
 
-    ```SQL
-    
-    ```
+      ```SQL
+      
+      ```
 
 15. Devuelve un listado que muestre solamente los empleados que no tienen
-   una oficina asociada.
+         una oficina asociada.
 
-    ```SQL
-    
-    ```
+      ```SQL
+      
+      ```
 
 16. Devuelve un listado que muestre solamente los empleados que no tienen un
-   cliente asociado.
+         cliente asociado.
 
-    ```SQL
-    
-    ```
+      ```SQL
+      
+      ```
 
 17. Devuelve un listado que muestre solamente los empleados que no tienen un
-   cliente asociado junto con los datos de la oficina donde trabajan.
+         cliente asociado junto con los datos de la oficina donde trabajan.
 
-    ```SQL
-    
-    ```
+      ```SQL
+      
+      ```
 
 18. Devuelve un listado que muestre los empleados que no tienen una oficina
-   asociada y los que no tienen un cliente asociado.
+         asociada y los que no tienen un cliente asociado.
 
-    ```SQL
-    
-    ```
+      ```SQL
+      
+      ```
 
 19. Devuelve un listado de los productos que nunca han aparecido en un
-   pedido.
+         pedido.
 
-    ```SQL
-    
-    ```
+      ```SQL
+      
+      ```
 
 20. Devuelve un listado de los productos que nunca han aparecido en un
-   pedido. El resultado debe mostrar el nombre, la descripción y la imagen del
-   producto.
+         pedido. El resultado debe mostrar el nombre, la descripción y la imagen del
+         producto.
 
-    ```SQL
-    
-    ```
+      ```SQL
+      
+      ```
 
 21. Devuelve las oficinas donde no trabajan ninguno de los empleados que
-    hayan sido los representantes de ventas de algún cliente que haya realizado
-    la compra de algún producto de la gama Frutales.
+      hayan sido los representantes de ventas de algún cliente que haya realizado
+      la compra de algún producto de la gama Frutales.
 
-    ```SQL
-    
-    ```
+      ```SQL
+      
+      ```
 
 22. Devuelve un listado con los clientes que han realizado algún pedido pero no
-    han realizado ningún pago.
+      han realizado ningún pago.
 
-    ```SQL
-    
-    ```
+      ```SQL
+      
+      ```
 
 23. Devuelve un listado con los datos de los empleados que no tienen clientes
-    asociados y el nombre de su jefe asociado.
-    Consultas resumen
+      asociados y el nombre de su jefe asociado.
+      Consultas resumen
 
-    ```SQL
-    
-    ```
+      ```SQL
+      
+      ```
 
 24. ¿Cuántos empleados hay en la compañía?
 
-    ```SQL
-    
-    ```
+      ```SQL
+      
+      ```
 
 25. ¿Cuántos clientes tiene cada país?
 
-    ```SQL
-    
-    ```
+      ```SQL
+      
+      ```
 
 26. ¿Cuál fue el pago medio en 2009?
 
-    ```SQL
-    
-    ```
+      ```SQL
+      
+      ```
 
 27. ¿Cuántos pedidos hay en cada estado? Ordena el resultado de forma
-   descendente por el número de pedidos.
+         descendente por el número de pedidos.
 
   ```SQL
   
   ```
 
 28. Calcula el precio de venta del producto más caro y más barato en una
-   misma consulta.
+      misma consulta.
 
     ```SQL
     
@@ -392,14 +439,14 @@
     ```
 
 31. ¿Calcula cuántos clientes tiene cada una de las ciudades que empiezan
-   por M?
+      por M?
 
     ```SQL
     
     ```
 
 32. Devuelve el nombre de los representantes de ventas y el número de clientes
-   al que atiende cada uno.
+      al que atiende cada uno.
 
     ```SQL
     
@@ -483,23 +530,23 @@
 ### Consultas variadas
 
 1. Devuelve el listado de clientes indicando el nombre del cliente y cuántos
-  pedidos ha realizado. Tenga en cuenta que pueden existir clientes que no
-  han realizado ningún pedido.
+    pedidos ha realizado. Tenga en cuenta que pueden existir clientes que no
+    han realizado ningún pedido.
 
     ```SQL
     
     ```
 
 2. Devuelve un listado con los nombres de los clientes y el total pagado por
-  cada uno de ellos. Tenga en cuenta que pueden existir clientes que no han
-  realizado ningún pago.
+    cada uno de ellos. Tenga en cuenta que pueden existir clientes que no han
+    realizado ningún pago.
 
     ```SQL
     
     ```
 
 3. Devuelve el nombre de los clientes que hayan hecho pedidos en 2008
-  ordenados alfabéticamente de menor a mayor.
+    ordenados alfabéticamente de menor a mayor.
 
     ```SQL
     
@@ -530,7 +577,7 @@ empleados que no sean representante de ventas de ningún cliente.
     ```
 
 7. Devuelve un listado indicando todas las ciudades donde hay oficinas y el
-número de empleados que tiene.
+   número de empleados que tiene.
 
     ```SQL
     

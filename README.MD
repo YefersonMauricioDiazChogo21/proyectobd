@@ -8,7 +8,7 @@
    SELECT codigo_oficina, ciudad 
    FROM oficina;
    ```
-
+  
 2. Devuelve un listado con la ciudad y el teléfono de las oficinas de España.
 
    ```sql
